@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		FE5E13F52798CC9700560CD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E13F42798CC9700560CD8 /* AppDelegate.swift */; };
 		FE5E13F72798CC9700560CD8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E13F62798CC9700560CD8 /* SceneDelegate.swift */; };
-		FE5E13F92798CC9700560CD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E13F82798CC9700560CD8 /* ViewController.swift */; };
-		FE5E13FC2798CC9700560CD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5E13FA2798CC9700560CD8 /* Main.storyboard */; };
 		FE5E13FE2798CC9900560CD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE5E13FD2798CC9900560CD8 /* Assets.xcassets */; };
 		FE5E14012798CC9900560CD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5E13FF2798CC9900560CD8 /* LaunchScreen.storyboard */; };
 		FE5E140C2798CC9900560CD8 /* ZeemeeCodeSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E140B2798CC9900560CD8 /* ZeemeeCodeSampleTests.swift */; };
 		FE5E14162798CC9900560CD8 /* ZeemeeCodeSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E14152798CC9900560CD8 /* ZeemeeCodeSampleUITests.swift */; };
 		FE5E14182798CC9900560CD8 /* ZeemeeCodeSampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E14172798CC9900560CD8 /* ZeemeeCodeSampleUITestsLaunchTests.swift */; };
+		FE5E14252798CE1900560CD8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E14242798CE1900560CD8 /* SearchViewController.swift */; };
+		FE5E14272798CE2400560CD8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E14262798CE2400560CD8 /* DetailViewController.swift */; };
+		FE5E14292798D04600560CD8 /* CocktailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E14282798D04600560CD8 /* CocktailService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +40,6 @@
 		FE5E13F12798CC9700560CD8 /* ZeemeeCodeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeemeeCodeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE5E13F42798CC9700560CD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE5E13F62798CC9700560CD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FE5E13F82798CC9700560CD8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FE5E13FB2798CC9700560CD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FE5E13FD2798CC9900560CD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE5E14002798CC9900560CD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE5E14022798CC9900560CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +48,9 @@
 		FE5E14112798CC9900560CD8 /* ZeemeeCodeSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZeemeeCodeSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE5E14152798CC9900560CD8 /* ZeemeeCodeSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeemeeCodeSampleUITests.swift; sourceTree = "<group>"; };
 		FE5E14172798CC9900560CD8 /* ZeemeeCodeSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeemeeCodeSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FE5E14242798CE1900560CD8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		FE5E14262798CE2400560CD8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FE5E14282798D04600560CD8 /* CocktailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +103,9 @@
 			children = (
 				FE5E13F42798CC9700560CD8 /* AppDelegate.swift */,
 				FE5E13F62798CC9700560CD8 /* SceneDelegate.swift */,
-				FE5E13F82798CC9700560CD8 /* ViewController.swift */,
-				FE5E13FA2798CC9700560CD8 /* Main.storyboard */,
+				FE5E14242798CE1900560CD8 /* SearchViewController.swift */,
+				FE5E14262798CE2400560CD8 /* DetailViewController.swift */,
+				FE5E14282798D04600560CD8 /* CocktailService.swift */,
 				FE5E13FD2798CC9900560CD8 /* Assets.xcassets */,
 				FE5E13FF2798CC9900560CD8 /* LaunchScreen.storyboard */,
 				FE5E14022798CC9900560CD8 /* Info.plist */,
@@ -233,7 +236,6 @@
 			files = (
 				FE5E14012798CC9900560CD8 /* LaunchScreen.storyboard in Resources */,
 				FE5E13FE2798CC9900560CD8 /* Assets.xcassets in Resources */,
-				FE5E13FC2798CC9700560CD8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +260,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE5E13F92798CC9700560CD8 /* ViewController.swift in Sources */,
 				FE5E13F52798CC9700560CD8 /* AppDelegate.swift in Sources */,
+				FE5E14272798CE2400560CD8 /* DetailViewController.swift in Sources */,
+				FE5E14252798CE1900560CD8 /* SearchViewController.swift in Sources */,
 				FE5E13F72798CC9700560CD8 /* SceneDelegate.swift in Sources */,
+				FE5E14292798D04600560CD8 /* CocktailService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +301,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FE5E13FA2798CC9700560CD8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FE5E13FB2798CC9700560CD8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FE5E13FF2798CC9900560CD8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -444,7 +440,6 @@
 				INFOPLIST_FILE = ZeemeeCodeSample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -472,7 +467,6 @@
 				INFOPLIST_FILE = ZeemeeCodeSample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

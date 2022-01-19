@@ -9,11 +9,11 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    let bootstrap = Bootstrap() // Holds the top level objects for basic app functions and inital state
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        bootstrap.start()
         return true
     }
 
@@ -34,3 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+class Bootstrap {
+    let navigationController = UINavigationController(rootViewController: SearchViewController())
+    let mainWindow = UIWindow()
+    
+    func start() {
+        mainWindow.rootViewController = navigationController
+        mainWindow.makeKeyAndVisible()
+    }
+}
