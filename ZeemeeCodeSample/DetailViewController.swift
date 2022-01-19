@@ -16,5 +16,18 @@ class DetailViewController: UIViewController {
 }
 
 class DetailView: UIView {
-   
+    let scrollView = UIScrollView()
+    let titleLabel = UILabel()
+    let imageView = UIImageView()
+    let instructionsHeader = UILabel()
+    let instructionsLabel = UILabel()
+    let ingredientsHeader = UILabel()
+    let ingredientStackView = UILabel()
+    let glassHeader = UILabel()
+    let glassLabel = UILabel()
+    let CTAWrapper = UIView()
+    let shareCTA = UIButton()
+    let shareTop = UIButton()
+    let back = UIButton()
+    
 }
