@@ -36,14 +36,15 @@ class SearchViewController: UIViewController {
     }
     
     func setupTable() {
-        internalView.resultsTable.register(ResultCell.self, forCellReuseIdentifier:ResultCell.reuseIdentifier)
+        internalView.resultsTable.register(SearchResultCell.self, forCellReuseIdentifier:SearchResultCell.reuseIdentifier)
+        internalView.resultsTable.delegate = self
         
         tableViewDatasource = DataSource(tableView: internalView.resultsTable) {
             (tableView, indexPath, cocktail) -> UITableViewCell? in
-            let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.reuseIdentifier,
-                                                     for: indexPath) as! ResultCell
-                        cell.populate(with: cocktail)
-                        return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultCell.reuseIdentifier,
+                                                     for: indexPath) as! SearchResultCell
+            cell.populate(with: cocktail)
+            return cell
         }
         
         searchManager.$searchResults
@@ -69,7 +70,16 @@ extension SearchViewController {
     enum Section: Int, Decodable, Hashable { case main }
 }
 
-
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedItem = tableViewDatasource?.itemIdentifier(for: indexPath) else { return }
+        let detail = DetailViewController(cocktail: selectedItem)
+        present(detail, animated: true) {
+            
+        }
+        
+    }
+}
 
 class SearchView: UIView {
     let searchTextField = UITextField()
@@ -88,6 +98,8 @@ class SearchView: UIView {
         searchTextField.backgroundColor = .secondarySystemBackground
         searchTextField.layer.cornerRadius = 4
         
+        resultsTable.rowHeight = UITableView.automaticDimension
+        
         safelyAddSubview(searchTextField)
         safelyAddSubview(resultsTable)
         
@@ -102,21 +114,3 @@ class SearchView: UIView {
         resultsTable.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }
-
-
-
-class ResultCell: UITableViewCell {
-    static let reuseIdentifier = "resultCell"
-    let titleLabel = UILabel()
-    let categoryLabel = UILabel()
-    let instructionsLabel = UILabel()
-//    let imageView = UIImageView()
-    
-    func populate(with cocktail: Cocktail) {
-        titleLabel.text = cocktail.strDrink
-        categoryLabel.text = cocktail.strCategory
-        instructionsLabel.text = cocktail.strInstructions
-//        imageView
-    }
-}
-

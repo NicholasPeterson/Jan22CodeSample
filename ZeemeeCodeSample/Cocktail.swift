@@ -79,7 +79,9 @@ extension Cocktail {
          (strIngredient12, strMeasure12),
          (strIngredient13, strMeasure13),
          (strIngredient14, strMeasure14),
-         (strIngredient15, strMeasure15)]
+         (strIngredient15, strMeasure15)].filter { (ingredient, measure) in
+            ingredient != nil && measure != nil
+        }
     }
     
     static func TEMPMOCK() -> Cocktail {

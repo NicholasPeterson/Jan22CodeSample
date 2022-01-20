@@ -20,6 +20,7 @@
 		FE5E142D2798E5B900560CD8 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E142C2798E5B900560CD8 /* Helpers.swift */; };
 		FE5E142F2798F97000560CD8 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E142E2798F97000560CD8 /* SearchResults.swift */; };
 		FE5E143127990AF900560CD8 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E143027990AF900560CD8 /* SearchManager.swift */; };
+		FE5E14332799198000560CD8 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E14322799198000560CD8 /* SearchResultCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		FE5E142C2798E5B900560CD8 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		FE5E142E2798F97000560CD8 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		FE5E143027990AF900560CD8 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
+		FE5E14322799198000560CD8 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				FE5E13F42798CC9700560CD8 /* AppDelegate.swift */,
 				FE5E14242798CE1900560CD8 /* SearchViewController.swift */,
+				FE5E14322799198000560CD8 /* SearchResultCell.swift */,
 				FE5E143027990AF900560CD8 /* SearchManager.swift */,
 				FE5E14262798CE2400560CD8 /* DetailViewController.swift */,
 				FE5E14282798D04600560CD8 /* CocktailService.swift */,
@@ -276,6 +279,7 @@
 				FE5E142F2798F97000560CD8 /* SearchResults.swift in Sources */,
 				FE5E14292798D04600560CD8 /* CocktailService.swift in Sources */,
 				FE5E142B2798D17700560CD8 /* Cocktail.swift in Sources */,
+				FE5E14332799198000560CD8 /* SearchResultCell.swift in Sources */,
 				FE5E143127990AF900560CD8 /* SearchManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
