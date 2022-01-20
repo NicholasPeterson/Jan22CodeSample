@@ -53,19 +53,30 @@ class DetailView: UIView {
 }
 
 class IngredientList: UIStackView {
-    var ingredientPairs = [Cocktail.ingredientPair]()
+    var ingredientPairs = [Cocktail.ingredientPair]() {
+        didSet {
+            updateContents()
+        }
+    }
     
     private func updateContents() {
-        
+        let lineItems = ingredientPairs.map { IngredientLineItem(with: $0) }
+        arrangedSubviews.forEach { removeArrangedSubview($0) }
+        lineItems.forEach { addArrangedSubview($0) }
     }
     
     class IngredientLineItem: UIView {
         let measureLabel = UILabel()
         let ingredientLabel = UILabel()
-        func populate(with pair: Cocktail.ingredientPair) {
+        
+        init(with pair: Cocktail.ingredientPair) {
+            super.init(frame: .zero)
             measureLabel.text = pair.measure
             ingredientLabel.text = pair.ingredient
-
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
         }
     }
 }
