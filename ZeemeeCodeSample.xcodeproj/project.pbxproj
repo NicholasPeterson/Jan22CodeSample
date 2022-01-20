@@ -18,6 +18,7 @@
 		FE5E14292798D04600560CD8 /* CocktailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E14282798D04600560CD8 /* CocktailService.swift */; };
 		FE5E142B2798D17700560CD8 /* Cocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E142A2798D17700560CD8 /* Cocktail.swift */; };
 		FE5E142D2798E5B900560CD8 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E142C2798E5B900560CD8 /* Helpers.swift */; };
+		FE5E142F2798F97000560CD8 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E142E2798F97000560CD8 /* SearchResults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		FE5E14282798D04600560CD8 /* CocktailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailService.swift; sourceTree = "<group>"; };
 		FE5E142A2798D17700560CD8 /* Cocktail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail.swift; sourceTree = "<group>"; };
 		FE5E142C2798E5B900560CD8 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		FE5E142E2798F97000560CD8 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				FE5E14242798CE1900560CD8 /* SearchViewController.swift */,
 				FE5E14262798CE2400560CD8 /* DetailViewController.swift */,
 				FE5E14282798D04600560CD8 /* CocktailService.swift */,
+				FE5E142E2798F97000560CD8 /* SearchResults.swift */,
 				FE5E142A2798D17700560CD8 /* Cocktail.swift */,
 				FE5E142C2798E5B900560CD8 /* Helpers.swift */,
 				FE5E13FD2798CC9900560CD8 /* Assets.xcassets */,
@@ -267,6 +270,7 @@
 				FE5E142D2798E5B900560CD8 /* Helpers.swift in Sources */,
 				FE5E14272798CE2400560CD8 /* DetailViewController.swift in Sources */,
 				FE5E14252798CE1900560CD8 /* SearchViewController.swift in Sources */,
+				FE5E142F2798F97000560CD8 /* SearchResults.swift in Sources */,
 				FE5E14292798D04600560CD8 /* CocktailService.swift in Sources */,
 				FE5E142B2798D17700560CD8 /* Cocktail.swift in Sources */,
 			);

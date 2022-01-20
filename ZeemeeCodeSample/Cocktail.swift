@@ -8,7 +8,7 @@
 // International Strings
 
 import Foundation
-struct Cocktail {
+struct Cocktail: Decodable, Hashable {
     let idDrink: Int
     let strDrink: String
     let strDrinkAlternate: String?
@@ -54,6 +54,12 @@ struct Cocktail {
     let strImageAttribution: String?
     let strCreativeCommonsConfirmed: String?
     let dateModified: Date
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(idDrink)
+        hasher.combine(strDrink)
+        hasher.combine(dateModified)
+      }
 }
 
 extension Cocktail {

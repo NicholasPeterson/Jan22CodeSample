@@ -11,6 +11,7 @@ class SearchViewController: UIViewController {
     let internalView = SearchView()
     let cocktailService = CocktailService()
     var currentSearchRequest: UserSearchRequest?
+    var tableViewDatasource: SearchResultsTableDatasource?
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -34,7 +35,15 @@ class SearchViewController: UIViewController {
     
     func setupTable() {
         internalView.resultsTable.register(ResultCell.self, forCellReuseIdentifier:ResultCell.reuseIdentifier)
-        in
+        
+        tableViewDatasource = SearchResultsTableDatasource(tableView: internalView.resultsTable) {
+            (tableView, indexPath, cocktail) -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.reuseIdentifier,
+                                                     for: indexPath) as! ResultCell
+                        cell.populate(with: cocktail)
+                        return cell
+        }
+        
     }
 
 }
@@ -90,4 +99,8 @@ class ResultCell: UITableViewCell {
         instructionsLabel.text = cocktail.strInstructions
 //        imageView
     }
+}
+
+class SearchResultsTableDatasource: UITableViewDiffableDataSource <SearchResults, Cocktail> {
+    
 }
