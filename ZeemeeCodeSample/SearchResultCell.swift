@@ -54,7 +54,7 @@ class SearchResultCell: UITableViewCell {
     
     func populate(with cocktail: Cocktail) {
         titleLabel.text = cocktail.strDrink
-        categoryLabel.text = cocktail.strCategory
+        categoryLabel.text = cocktail.strCategory.uppercased()
         instructionsLabel.text = cocktail.strInstructions
         image.load(url: URL(string: cocktail.strDrinkThumb)!)
     }

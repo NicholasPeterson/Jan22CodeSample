@@ -24,7 +24,14 @@ class Bootstrap {
     let mainWindow = UIWindow()
     
     func start() {
+        UINavigationBar.appearance().prefersLargeTitles = true
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        navigationController.navigationBar.standardAppearance = appearance;
+        navigationController.navigationBar.scrollEdgeAppearance = navigationController.navigationBar.standardAppearance
+        
         mainWindow.rootViewController = navigationController
         mainWindow.makeKeyAndVisible() //TODO: IOS13 throws a soft-warning "UIWindows were created prior to initial application activation. This may result in incorrect visual appearance."
     }
+    
 }

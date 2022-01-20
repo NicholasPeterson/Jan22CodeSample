@@ -10,10 +10,12 @@ import UIKit
 class DetailViewController: UIViewController {
     let internalView = DetailView()
     let cocktail: Cocktail
-    init(cocktail: Cocktail){
+    init(cocktail: Cocktail) {
         self.cocktail = cocktail
         super.init(nibName: nil, bundle: nil)
         self.navigationItem.title = cocktail.strDrink
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: nil, action: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -31,18 +33,16 @@ class DetailViewController: UIViewController {
 
 class DetailView: UIView {
     let scrollView = UIScrollView()
-    let titleLabel = UILabel()
     let imageView = UIImageView()
     let instructionsHeader = UILabel().withText("INSTRUCTIONS")
     let instructionsLabel = UILabel()
-    let ingredientsHeader = UILabel().withText("INGREDIENTS")
+    let ingredientsHeader = UILabel().withText("INGREDIENTS") // Will get overridden
     let ingredientList = IngredientList()
     let glassHeader = UILabel().withText("GLASS NEEDED")
     let glassLabel = UILabel()
-    let CTAWrapper = UIView()
+    let categoryBadge = UIView()
+    let categoryBadgeLabel = UILabel()
     let shareCTA = UIButton()
-    let shareTop = UIButton()
-    let back = UIButton()
    
     init() {
         super.init(frame: .zero)
@@ -58,35 +58,51 @@ class DetailView: UIView {
         instructionsLabel.numberOfLines = 0
         instructionsLabel.lineBreakMode = .byWordWrapping
         
+        categoryBadge.backgroundColor = .systemGreen
+        categoryBadge.layer.cornerRadius = 4
+        categoryBadgeLabel.textColor = .white
+
         ingredientList.axis = .vertical
         
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
+        shareCTA.backgroundColor = .systemBlue
+        shareCTA.layer.cornerRadius = 7
+        
         safelyAddSubview(scrollView)
-        scrollView.safelyAddSubview(titleLabel)
         scrollView.safelyAddSubview(imageView)
+        
+        scrollView.safelyAddSubview(categoryBadge)
+        categoryBadge.safelyAddSubview(categoryBadgeLabel)
+        
         scrollView.safelyAddSubview(instructionsHeader)
         scrollView.safelyAddSubview(instructionsLabel)
         scrollView.safelyAddSubview(ingredientsHeader)
         scrollView.safelyAddSubview(ingredientList)
         scrollView.safelyAddSubview(glassHeader)
         scrollView.safelyAddSubview(glassLabel)
-        
-        safelyAddSubview(CTAWrapper)
-        CTAWrapper.safelyAddSubview(shareCTA)
+        scrollView.safelyAddSubview(shareCTA)
         
         scrollView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
         scrollView.bottomAnchor.constraint(greaterThanOrEqualTo: bottomAnchor, constant: 0).isActive = true
         
-        titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 12).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 22).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 22).isActive = true
-        
-        imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
+        imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 12).isActive = true
         imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 22).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 22).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -12).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 12).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         
+        categoryBadge.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -22).isActive = true
+        categoryBadge.leadingAnchor.constraint(equalTo: instructionsHeader.leadingAnchor, constant: 0).isActive = true
+
+        categoryBadgeLabel.topAnchor.constraint(equalTo: categoryBadge.topAnchor, constant: 1).isActive = true
+        categoryBadgeLabel.leadingAnchor.constraint(equalTo: categoryBadge.leadingAnchor, constant: 7).isActive = true
+        categoryBadgeLabel.bottomAnchor.constraint(equalTo: categoryBadge.bottomAnchor, constant: -1).isActive = true
+        categoryBadgeLabel.trailingAnchor.constraint(equalTo: categoryBadge.trailingAnchor, constant: -7).isActive = true
+
         instructionsHeader.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 12).isActive = true
         instructionsHeader.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 22).isActive = true
         instructionsHeader.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 22).isActive = true
@@ -110,12 +126,15 @@ class DetailView: UIView {
         glassLabel.topAnchor.constraint(equalTo: glassHeader.bottomAnchor, constant: 12).isActive = true
         glassLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -22).isActive = true
         glassLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 22).isActive = true
-        glassLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -22).isActive = true
-    }
+        
+        shareCTA.topAnchor.constraint(equalTo: glassLabel.bottomAnchor, constant: 12).isActive = true
+        shareCTA.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0).isActive = true
+        shareCTA.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        shareCTA.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -22).isActive = true    }
     
     func populate(with cocktail: Cocktail) {
-        titleLabel.text = cocktail.strDrink
         imageView.load(url: URL(string: cocktail.strDrinkThumb)!)
+        categoryBadgeLabel.text = cocktail.strCategory.uppercased()
         instructionsLabel.text = cocktail.strInstructions
         ingredientsHeader.text = "\(cocktail.ingredientList.count) INGREDIENTS"
         ingredientList.ingredientPairs = cocktail.ingredientList

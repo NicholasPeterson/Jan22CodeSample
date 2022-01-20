@@ -46,6 +46,7 @@ class SearchViewController: UIViewController {
             cell.populate(with: cocktail)
             return cell
         }
+        tableViewDatasource?.defaultRowAnimation = .middle
         
         searchManager.$searchResults
             .sink (receiveValue: { results in
@@ -73,7 +74,7 @@ extension SearchViewController {
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedItem = tableViewDatasource?.itemIdentifier(for: indexPath) else { return }
-        let detail = DetailViewController(cocktail: selectedItem)
+        let detail = UINavigationController(rootViewController: DetailViewController(cocktail: selectedItem))
         present(detail, animated: true) {
             
         }
@@ -95,11 +96,14 @@ class SearchView: UIView {
     }
     
     func setupViews() {
+        backgroundColor = .systemBackground
         searchTextField.backgroundColor = .secondarySystemBackground
         searchTextField.layer.cornerRadius = 4
+        searchTextField.placeholder = "Search cocktails"
+        searchTextField.clearButtonMode = .whileEditing
         
         resultsTable.rowHeight = UITableView.automaticDimension
-        
+
         safelyAddSubview(searchTextField)
         safelyAddSubview(resultsTable)
         
