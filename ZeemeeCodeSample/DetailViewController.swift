@@ -26,15 +26,16 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         internalView.populate(with: cocktail)
     }
+
 }
 
 class DetailView: UIView {
     let scrollView = UIScrollView()
     let titleLabel = UILabel()
     let imageView = UIImageView()
-    let instructionsHeader = UILabel()
+    let instructionsHeader = UILabel().withText("INSTRUCTIONS")
     let instructionsLabel = UILabel()
-    let ingredientsHeader = UILabel()
+    let ingredientsHeader = UILabel().withText("INGREDIENTS")
     let ingredientList = IngredientList()
     let glassHeader = UILabel()
     let glassLabel = UILabel()
@@ -43,10 +44,27 @@ class DetailView: UIView {
     let shareTop = UIButton()
     let back = UIButton()
     
+    func setupViews() {
+        safelyAddSubview(scrollView)
+        scrollView.safelyAddSubview(titleLabel)
+        scrollView.safelyAddSubview(imageView)
+        scrollView.safelyAddSubview(instructionsHeader)
+        scrollView.safelyAddSubview(instructionsLabel)
+        scrollView.safelyAddSubview(ingredientList)
+        scrollView.safelyAddSubview(glassHeader)
+        scrollView.safelyAddSubview(glassLabel)
+        
+        safelyAddSubview(CTAWrapper)
+        CTAWrapper.safelyAddSubview(shareCTA)
+        
+        
+    }
+    
     func populate(with cocktail: Cocktail) {
         titleLabel.text = cocktail.strDrink
 //        imageView.image = Image()
         instructionsLabel.text = cocktail.strInstructions
+        ingredientsHeader.text = "\(cocktail.ingredientList.count) INGREDIENTS"
         ingredientList.ingredientPairs = cocktail.ingredientList
         glassLabel.text = cocktail.strGlass
     }

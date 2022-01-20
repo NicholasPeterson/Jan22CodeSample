@@ -17,6 +17,7 @@
 		FE5E14272798CE2400560CD8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E14262798CE2400560CD8 /* DetailViewController.swift */; };
 		FE5E14292798D04600560CD8 /* CocktailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E14282798D04600560CD8 /* CocktailService.swift */; };
 		FE5E142B2798D17700560CD8 /* Cocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E142A2798D17700560CD8 /* Cocktail.swift */; };
+		FE5E142D2798E5B900560CD8 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E142C2798E5B900560CD8 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		FE5E14262798CE2400560CD8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FE5E14282798D04600560CD8 /* CocktailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailService.swift; sourceTree = "<group>"; };
 		FE5E142A2798D17700560CD8 /* Cocktail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail.swift; sourceTree = "<group>"; };
+		FE5E142C2798E5B900560CD8 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				FE5E14262798CE2400560CD8 /* DetailViewController.swift */,
 				FE5E14282798D04600560CD8 /* CocktailService.swift */,
 				FE5E142A2798D17700560CD8 /* Cocktail.swift */,
+				FE5E142C2798E5B900560CD8 /* Helpers.swift */,
 				FE5E13FD2798CC9900560CD8 /* Assets.xcassets */,
 				FE5E13FF2798CC9900560CD8 /* LaunchScreen.storyboard */,
 				FE5E14022798CC9900560CD8 /* Info.plist */,
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE5E13F52798CC9700560CD8 /* AppDelegate.swift in Sources */,
+				FE5E142D2798E5B900560CD8 /* Helpers.swift in Sources */,
 				FE5E14272798CE2400560CD8 /* DetailViewController.swift in Sources */,
 				FE5E14252798CE1900560CD8 /* SearchViewController.swift in Sources */,
 				FE5E14292798D04600560CD8 /* CocktailService.swift in Sources */,

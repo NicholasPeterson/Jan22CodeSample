@@ -15,6 +15,7 @@ class SearchViewController: UIViewController {
     init(){
         super.init(nibName: nil, bundle: nil)
         self.navigationItem.title = "Search"
+        self.edgesForExtendedLayout = []
     }
     
     required init?(coder: NSCoder) {
@@ -22,15 +23,18 @@ class SearchViewController: UIViewController {
     }
     
     override func loadView() {
+        super.loadView()
         view = internalView
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         setupTable()
     }
     
     func setupTable() {
         internalView.resultsTable.register(ResultCell.self, forCellReuseIdentifier:ResultCell.reuseIdentifier)
+        in
     }
 
 }
@@ -38,6 +42,33 @@ class SearchViewController: UIViewController {
 class SearchView: UIView {
     let searchTextField = UITextField()
     let resultsTable = UITableView()
+    
+    init() {
+        super.init(frame: .zero)
+        setupViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViews() {
+        searchTextField.backgroundColor = .secondarySystemBackground
+        searchTextField.layer.cornerRadius = 4
+        
+        safelyAddSubview(searchTextField)
+        safelyAddSubview(resultsTable)
+        
+        searchTextField.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
+        searchTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22).isActive = true
+        searchTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22).isActive = true
+        searchTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        resultsTable.topAnchor.constraint(equalTo: searchTextField.bottomAnchor).isActive = true
+        resultsTable.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        resultsTable.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        resultsTable.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
     
 }
 
