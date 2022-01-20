@@ -19,14 +19,17 @@ class CocktailService {
     let rootURL = "https://www.thecocktaildb.com/api/json/v1/1/"
     
     func search(query: String,
-                error: @escaping ()->(CocktailServiceError),
-                success: @escaping ()->([Cocktail])) {
+                error: @escaping (CocktailServiceError)->(),
+                success: @escaping (SearchResults)->()) {
+        let exampleCocktail = Cocktail.TEMPMOCK()
+        let searchResult = SearchResults(query: query, results: [exampleCocktail])
+        return success(searchResult)
         
     }
     
     func detail(query: String,
-                error: @escaping ()->(CocktailServiceError),
-                success: @escaping ()->([Cocktail])) {
+                error: @escaping (CocktailServiceError)->(),
+                success: @escaping ([Cocktail])->()) {
         
     }
 }

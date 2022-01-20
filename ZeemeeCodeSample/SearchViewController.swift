@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class SearchViewController: UIViewController {
     let internalView = SearchView()
-    let cocktailService = CocktailService()
-    var currentSearchRequest: UserSearchRequest?
-    var tableViewDatasource: SearchResultsTableDatasource?
+    var subscriptions = [AnyCancellable]()
+    var tableViewDatasource: DataSource?
+    let searchManager = SearchManager()
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -31,12 +32,13 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
+        setupSearchField()
     }
     
     func setupTable() {
         internalView.resultsTable.register(ResultCell.self, forCellReuseIdentifier:ResultCell.reuseIdentifier)
         
-        tableViewDatasource = SearchResultsTableDatasource(tableView: internalView.resultsTable) {
+        tableViewDatasource = DataSource(tableView: internalView.resultsTable) {
             (tableView, indexPath, cocktail) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.reuseIdentifier,
                                                      for: indexPath) as! ResultCell
@@ -44,9 +46,30 @@ class SearchViewController: UIViewController {
                         return cell
         }
         
+        searchManager.$searchResults
+            .sink (receiveValue: { results in
+                var snapshot = Snapshot()
+                   snapshot.appendSections([.main])
+                snapshot.appendItems(results.results)
+                self.tableViewDatasource?.apply(snapshot, animatingDifferences: true)
+        }).store(in: &subscriptions)
+        
     }
-
+    
+    func setupSearchField() {
+        internalView.searchTextField.textPublisher
+            .assign(to: \.currentSearchQuery, on: searchManager)
+            .store(in: &subscriptions)
+    }
 }
+
+extension SearchViewController {
+    typealias DataSource = UITableViewDiffableDataSource<Section, Cocktail>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Cocktail>
+    enum Section: Int, Decodable, Hashable { case main }
+}
+
+
 
 class SearchView: UIView {
     let searchTextField = UITextField()
@@ -78,13 +101,9 @@ class SearchView: UIView {
         resultsTable.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         resultsTable.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-    
 }
 
-struct UserSearchRequest {
-    let searchQuery: String
-    let service: CocktailService
-}
+
 
 class ResultCell: UITableViewCell {
     static let reuseIdentifier = "resultCell"
@@ -101,6 +120,3 @@ class ResultCell: UITableViewCell {
     }
 }
 
-class SearchResultsTableDatasource: UITableViewDiffableDataSource <SearchResults, Cocktail> {
-    
-}

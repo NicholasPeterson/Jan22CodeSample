@@ -27,3 +27,7 @@ class SearchResults: Decodable, Hashable {
         return lhs.hashValue == rhs.hashValue
     }
 }
+
+extension SearchResults {
+    static let Empty = SearchResults(query: "", results: [])
+}
