@@ -115,7 +115,7 @@ class DetailView: UIView {
     
     func populate(with cocktail: Cocktail) {
         titleLabel.text = cocktail.strDrink
-//        imageView.image = Image()
+        imageView.load(url: URL(string: cocktail.strDrinkThumb)!)
         instructionsLabel.text = cocktail.strInstructions
         ingredientsHeader.text = "\(cocktail.ingredientList.count) INGREDIENTS"
         ingredientList.ingredientPairs = cocktail.ingredientList
