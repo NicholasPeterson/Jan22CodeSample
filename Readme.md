@@ -5,6 +5,7 @@ Nick Peterson - Jan 2022
 Time spent: ~10 hours
 
 tested on iPhone 13, iPhone 13 Max
+Built on XCode 13.2.1 
 
 [Video](https://user-images.githubusercontent.com/875775/150468887-903709d0-2972-406f-8820-9eaf4cfdad96.mov)
 
