@@ -7,11 +7,20 @@
 
 import Foundation
 
+struct LiteCocktail: Decodable, Hashable {
+    let idDrink: String
+    let strDrink: String
+    let strInstructions: String
+    let strDrinkThumb: String
+    let strCategory: String
+}
+
 class SearchResults: Decodable, Hashable {
     let query: String
-    let results: [Cocktail]
+    let results: [LiteCocktail]
     
-    init(query: String, results: [Cocktail]) {
+    
+    init(query: String, results: [LiteCocktail]) {
         self.query = query
         self.results = results
     }

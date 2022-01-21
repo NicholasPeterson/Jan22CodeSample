@@ -9,10 +9,10 @@ import UIKit
 import Combine
 
 class SearchViewController: UIViewController {
-    let internalView = SearchView()
-    var subscriptions = [AnyCancellable]()
-    var tableViewDatasource: DataSource?
-    let searchManager = SearchManager()
+    private let internalView = SearchView()
+    private var subscriptions = [AnyCancellable]()
+    private var tableViewDatasource: DataSource?
+    private let searchManager = SearchManager()
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -35,7 +35,7 @@ class SearchViewController: UIViewController {
         setupSearchField()
     }
     
-    func setupTable() {
+    private func setupTable() {
         internalView.resultsTable.register(SearchResultCell.self, forCellReuseIdentifier:SearchResultCell.reuseIdentifier)
         internalView.resultsTable.delegate = self
         
@@ -58,27 +58,36 @@ class SearchViewController: UIViewController {
         
     }
     
-    func setupSearchField() {
+    private func setupSearchField() {
         internalView.searchTextField.textPublisher
             .assign(to: \.currentSearchQuery, on: searchManager)
             .store(in: &subscriptions)
     }
+    
+    private func presentDetailForId(id: String) {
+        CocktailService().detailPublisher(for: id)
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                print(error)
+            } receiveValue: { cocktail in
+                let detail = UINavigationController(rootViewController: DetailViewController(cocktail: cocktail))
+                self.present(detail, animated: true) {
+                }
+            }.store(in: &subscriptions)
+    }
 }
 
 extension SearchViewController {
-    typealias DataSource = UITableViewDiffableDataSource<Section, Cocktail>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Cocktail>
+    typealias DataSource = UITableViewDiffableDataSource<Section, LiteCocktail>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, LiteCocktail>
     enum Section: Int, Decodable, Hashable { case main }
 }
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedItem = tableViewDatasource?.itemIdentifier(for: indexPath) else { return }
-        let detail = UINavigationController(rootViewController: DetailViewController(cocktail: selectedItem))
-        present(detail, animated: true) {
-            
-        }
         
+        presentDetailForId(id: selectedItem.idDrink)
     }
 }
 

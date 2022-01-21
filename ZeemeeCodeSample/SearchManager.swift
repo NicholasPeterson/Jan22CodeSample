@@ -23,6 +23,7 @@ class SearchManager {
     @Published var currentSearchQuery = "" {
         didSet {
             autoSubmitTimeout?.cancel()
+            currentSubmission?.cancel()
             autoSubmitTimeout = Timer.publish(every: 0.5,
                                               on: .main,
                                               in: .default)
@@ -37,12 +38,13 @@ class SearchManager {
     
     
     private func triggerAutoSubmit(query: String) {
-        
         currentSubmission = cocktailService.searchPublisher(for: query)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: {error in
-                print("[Error] search(\(query)) - \(error)")
-                self.searchResults = .Empty
+            .sink(receiveCompletion: {result in
+                if case Subscribers.Completion.failure(let error) = result {
+                    print("[Error] search(\(query)) - \(error)")
+                    self.searchResults = .Empty // May need to check is the error is a cancellation.
+                }
             }, receiveValue: { results in
                 self.searchResults = results
             })

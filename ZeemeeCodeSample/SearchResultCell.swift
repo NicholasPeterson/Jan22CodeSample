@@ -13,6 +13,7 @@ class SearchResultCell: UITableViewCell {
     let categoryLabel = UILabel()
     let instructionsLabel = UILabel()
     let image = UIImageView()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -21,11 +22,15 @@ class SearchResultCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    override func prepareForReuse() {
+        image.image = nil
+    }
     
     func setupViews() {
         instructionsLabel.numberOfLines = 2
         image.layer.cornerRadius = 22
         image.clipsToBounds = true
+        image.backgroundColor = .secondarySystemBackground
         
         safelyAddSubview(titleLabel)
         safelyAddSubview(categoryLabel)
@@ -49,10 +54,9 @@ class SearchResultCell: UITableViewCell {
         instructionsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22).isActive = true
         instructionsLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 10).isActive = true
         instructionsLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -22).isActive = true
-
     }
     
-    func populate(with cocktail: Cocktail) {
+    func populate(with cocktail: LiteCocktail) {
         titleLabel.text = cocktail.strDrink
         categoryLabel.text = cocktail.strCategory.uppercased()
         instructionsLabel.text = cocktail.strInstructions

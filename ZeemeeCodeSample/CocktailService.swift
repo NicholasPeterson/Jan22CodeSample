@@ -8,46 +8,32 @@
 import Combine
 import Foundation
 
-
+/// CocktailService provides access the thecocktaildb via Combine publishers.
+///
 class CocktailService {
     typealias SearchPublisher = AnyPublisher<SearchResults, Error>
     typealias DetailPublisher = AnyPublisher<Cocktail, Error>
     
     private let urlSession = URLSession.shared
-    private let decoder = JSONDecoder()
     
     func searchPublisher(for query: String) -> SearchPublisher {
-        do {
-            let request = try SearchRequest(query: query).asURLRequest()
-            
-            return urlSession.dataTaskPublisher(for: request)
-                .tryMap() { element -> Data in
-                    guard let httpResponse = element.response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                            throw URLError(.badServerResponse)
-                        }
-                    return element.data
-                    }
-                .decode(type: SearchResults.self, decoder: decoder)
-                .eraseToAnyPublisher()
-            
-        } catch { return Fail(error: error).eraseToAnyPublisher() }
+        let request = SearchRequest(query: query)
+        
+        return urlSession.publisher(for: request)
+            .map({ SearchResults(query: query, results: $0) })
+            .eraseToAnyPublisher()
     }
     
     func detailPublisher(for id: String) -> DetailPublisher {
-        do {
-            let request = try DetailRequest(id: id).asURLRequest()
-            
-            return urlSession.dataTaskPublisher(for: request)
-                .tryMap() { element -> Data in
-                    guard let httpResponse = element.response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                            throw URLError(.badServerResponse)
-                        }
-                    return element.data
-                    }
-                .decode(type: Cocktail.self, decoder: decoder)
-                .eraseToAnyPublisher()
-            
-        } catch { return Fail(error: error).eraseToAnyPublisher() }
+        let request = DetailRequest(id: id)
+        
+        return (urlSession.publisher(for: request) as AnyPublisher<[Cocktail], Error>)
+            .tryMap({
+                guard let cocktail = $0.last else { throw ServiceError("Unknown Decoding Error") }
+                return cocktail
+            })
+            .eraseToAnyPublisher()
+
     }
     
     struct ServiceError: Error {
@@ -57,7 +43,10 @@ class CocktailService {
             self.message = message
         }
     }
-    
+}
+
+/// Specificly modeled API Endpoints.
+extension CocktailService {
     struct SearchRequest: CocktailServiceRequest {
         let endpoint = "search.php"
         let query: String
@@ -69,7 +58,6 @@ class CocktailService {
     }
     
     struct DetailRequest: CocktailServiceRequest {
-        
         let endpoint = "lookup.php"
         let id: String
         var body : [String: String] {
@@ -79,42 +67,3 @@ class CocktailService {
         }
     }
 }
-
-protocol CocktailServiceRequest {
-    /// The method for this request, Currently only http-get is supported.
-    var method: String { get }
-    /// The API Endpoint
-    var endpoint: String { get }
-    /// The api-encoded version of the request paramenters
-    var body: [String: String] { get }
-    /// Returns a configured URLRequest. Currently only supports http-get method
-    func asURLRequest() throws -> URLRequest
-}
-
-extension CocktailServiceRequest {
-    var method: String { "GET" } // default to http_get because we arent supporting anything else right now.
-    
-    func asURLRequest() throws -> URLRequest {
-        var urlBits = URLComponents()
-        urlBits.scheme = "https"
-        urlBits.host = "www.thecocktaildb.com"
-        urlBits.path = "/api/json/v1/1/\(endpoint)"
-        urlBits.queryItems = body.map{ (key, value) in
-            URLQueryItem(name: key, value: value)
-        }
-        
-        guard let url = urlBits.url else {
-            throw CocktailService.ServiceError("Unable to generate a URL with components [\(urlBits)]")
-            
-        }
-        
-        var request = URLRequest(url: url,
-                        cachePolicy: .returnCacheDataElseLoad,
-                   timeoutInterval: 10)
-        
-        request.httpMethod = method
-        return request
-    }
-}
-
-
