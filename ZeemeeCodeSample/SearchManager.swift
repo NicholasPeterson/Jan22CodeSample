@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-
 /// Coordinates the Interactions between the user and our data layer
 class SearchManager {
     private let cocktailService = CocktailService()
@@ -38,12 +37,17 @@ class SearchManager {
     
     
     private func triggerAutoSubmit(query: String) {
+        guard !query.isEmpty else {
+            self.searchResults = .Empty
+            return
+        }
+        
         currentSubmission = cocktailService.searchPublisher(for: query)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {result in
                 if case Subscribers.Completion.failure(let error) = result {
                     print("[Error] search(\(query)) - \(error)")
-                    self.searchResults = .Empty // May need to check is the error is a cancellation.
+                    self.searchResults = .Empty
                 }
             }, receiveValue: { results in
                 self.searchResults = results

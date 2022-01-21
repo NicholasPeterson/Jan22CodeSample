@@ -67,8 +67,10 @@ class SearchViewController: UIViewController {
     private func presentDetailForId(id: String) {
         CocktailService().detailPublisher(for: id)
             .receive(on: DispatchQueue.main)
-            .sink { error in
-                print(error)
+            .sink { result in
+                if case Subscribers.Completion.failure(let error) = result {
+                    print(error)
+                }
             } receiveValue: { cocktail in
                 let detail = UINavigationController(rootViewController: DetailViewController(cocktail: cocktail))
                 self.present(detail, animated: true) {
@@ -88,6 +90,7 @@ extension SearchViewController: UITableViewDelegate {
         guard let selectedItem = tableViewDatasource?.itemIdentifier(for: indexPath) else { return }
         
         presentDetailForId(id: selectedItem.idDrink)
+        tableView.cellForRow(at: indexPath)?.isSelected = false
     }
 }
 
@@ -108,6 +111,7 @@ class SearchView: UIView {
         backgroundColor = .systemBackground
         searchTextField.backgroundColor = .secondarySystemBackground
         searchTextField.layer.cornerRadius = 4
+        searchTextField.font = .boldSystemFont(ofSize: UIFont.systemFontSize)
         searchTextField.placeholder = "Search cocktails"
         searchTextField.clearButtonMode = .whileEditing
         

@@ -9,9 +9,9 @@ import UIKit
 
 class SearchResultCell: UITableViewCell {
     static let reuseIdentifier = "SearchResultCell"
-    let titleLabel = UILabel()
-    let categoryLabel = UILabel()
-    let instructionsLabel = UILabel()
+    let titleLabel = UILabel().withFont(.boldSystemFont(ofSize: 16))
+    let categoryLabel = UILabel().withFont(.boldSystemFont(ofSize: 11)).withTextColor(.systemGray)
+    let instructionsLabel = UILabel().withFont(.systemFont(ofSize: 13))
     let image = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -38,19 +38,19 @@ class SearchResultCell: UITableViewCell {
         safelyAddSubview(image)
 
         image.heightAnchor.constraint(equalTo: image.widthAnchor).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        image.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
-        image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        image.topAnchor.constraint(equalTo: topAnchor, constant: 7).isActive = true
+        image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22).isActive = true
 
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 3).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 10).isActive = true
         
-        categoryLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
+        categoryLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3).isActive = true
         categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22).isActive = true
         categoryLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 10).isActive = true
 
-        instructionsLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 12).isActive = true
+        instructionsLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 3).isActive = true
         instructionsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22).isActive = true
         instructionsLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 10).isActive = true
         instructionsLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -22).isActive = true

@@ -15,7 +15,7 @@ class DetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.navigationItem.title = cocktail.strDrink
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: nil, action: nil)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close) )
     }
     
     required init?(coder: NSCoder) {
@@ -28,21 +28,26 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         internalView.populate(with: cocktail)
     }
+    
+    @objc func close() {
+        dismiss(animated: true) {}
+    }
 
 }
 
 class DetailView: UIView {
     let scrollView = UIScrollView()
     let imageView = UIImageView()
-    let instructionsHeader = UILabel().withText("INSTRUCTIONS")
+    let instructionsHeader = UILabel().withText("INSTRUCTIONS").withFont(.boldSystemFont(ofSize: 13)).withTextColor(.systemGray)
     let instructionsLabel = UILabel()
-    let ingredientsHeader = UILabel().withText("INGREDIENTS") // Will get overridden
+    let ingredientsHeader = UILabel().withText("INGREDIENTS").withFont(.boldSystemFont(ofSize: 13)).withTextColor(.systemGray)
     let ingredientList = IngredientList()
-    let glassHeader = UILabel().withText("GLASS NEEDED")
+    let glassHeader = UILabel().withText("GLASS NEEDED").withFont(.boldSystemFont(ofSize: 13)).withTextColor(.systemGray)
     let glassLabel = UILabel()
     let categoryBadge = UIView()
-    let categoryBadgeLabel = UILabel()
-    let shareCTA = UIButton()
+    let categoryBadgeLabel = UILabel().withFont(.boldSystemFont(ofSize: 11)).withTextColor(.white)
+    let separator = UIView.makeSeparator()
+    let shareCTA = UIButton().withText("Share")
    
     init() {
         super.init(frame: .zero)
@@ -60,8 +65,6 @@ class DetailView: UIView {
         
         categoryBadge.backgroundColor = .systemGreen
         categoryBadge.layer.cornerRadius = 4
-        categoryBadgeLabel.textColor = .white
-
         ingredientList.axis = .vertical
         
         imageView.contentMode = .scaleAspectFill
@@ -82,6 +85,7 @@ class DetailView: UIView {
         scrollView.safelyAddSubview(ingredientList)
         scrollView.safelyAddSubview(glassHeader)
         scrollView.safelyAddSubview(glassLabel)
+        scrollView.safelyAddSubview(separator)
         scrollView.safelyAddSubview(shareCTA)
         
         scrollView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
@@ -98,9 +102,9 @@ class DetailView: UIView {
         categoryBadge.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -22).isActive = true
         categoryBadge.leadingAnchor.constraint(equalTo: instructionsHeader.leadingAnchor, constant: 0).isActive = true
 
-        categoryBadgeLabel.topAnchor.constraint(equalTo: categoryBadge.topAnchor, constant: 1).isActive = true
+        categoryBadgeLabel.topAnchor.constraint(equalTo: categoryBadge.topAnchor, constant: 4).isActive = true
         categoryBadgeLabel.leadingAnchor.constraint(equalTo: categoryBadge.leadingAnchor, constant: 7).isActive = true
-        categoryBadgeLabel.bottomAnchor.constraint(equalTo: categoryBadge.bottomAnchor, constant: -1).isActive = true
+        categoryBadgeLabel.bottomAnchor.constraint(equalTo: categoryBadge.bottomAnchor, constant: -4).isActive = true
         categoryBadgeLabel.trailingAnchor.constraint(equalTo: categoryBadge.trailingAnchor, constant: -7).isActive = true
 
         instructionsHeader.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 12).isActive = true
@@ -127,9 +131,14 @@ class DetailView: UIView {
         glassLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -22).isActive = true
         glassLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 22).isActive = true
         
-        shareCTA.topAnchor.constraint(equalTo: glassLabel.bottomAnchor, constant: 12).isActive = true
+        separator.topAnchor.constraint(equalTo: glassLabel.bottomAnchor, constant: 12).isActive = true
+        separator.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -22).isActive = true
+        separator.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 22).isActive = true
+        
+        shareCTA.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 12).isActive = true
         shareCTA.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0).isActive = true
-        shareCTA.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        shareCTA.widthAnchor.constraint(equalToConstant: 275).isActive = true
+        shareCTA.heightAnchor.constraint(equalToConstant: 55).isActive = true
         shareCTA.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -22).isActive = true    }
     
     func populate(with cocktail: Cocktail) {
@@ -156,7 +165,7 @@ class IngredientList: UIStackView {
     }
     
     class IngredientLineItem: UIView {
-        let measureLabel = UILabel()
+        let measureLabel = UILabel().withFont(.boldSystemFont(ofSize: UIFont.systemFontSize))
         let ingredientLabel = UILabel()
         
         init(with pair: Cocktail.ingredientPair) {

@@ -21,6 +21,15 @@ extension UILabel {
         self.text = text
         return self
     }
+    func withFont(_ font: UIFont) -> UILabel {
+        self.font = font
+        return self
+    }
+    
+    func withTextColor(_ color: UIColor) -> UILabel {
+        self.textColor = color
+        return self
+    }
 }
 
 /// Creates a text published for views to subscribe to
@@ -37,6 +46,13 @@ extension UITextField {
 
 }
 
+extension UIButton {
+    func withText(_ text: String?) -> UIButton {
+        setTitle(text, for: .normal)
+        return self
+    }
+}
+
 ///Inlue of SDWebImage
 extension UIImageView {
     func load(url: URL) {
@@ -49,5 +65,14 @@ extension UIImageView {
                 }
             }
         }
+    }
+}
+
+extension UIView {
+    static func makeSeparator() -> UIView {
+        let view = UIView()
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = .systemFill
+        return view
     }
 }
