@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FE3A1942279A440100018528 /* CocktailServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3A1941279A440100018528 /* CocktailServiceRequest.swift */; };
+		FE3A1947279A749300018528 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = FE3A1946279A749300018528 /* Readme.md */; };
 		FE5E13F52798CC9700560CD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E13F42798CC9700560CD8 /* AppDelegate.swift */; };
 		FE5E13FE2798CC9900560CD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE5E13FD2798CC9900560CD8 /* Assets.xcassets */; };
 		FE5E14012798CC9900560CD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5E13FF2798CC9900560CD8 /* LaunchScreen.storyboard */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		FE3A1941279A440100018528 /* CocktailServiceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailServiceRequest.swift; sourceTree = "<group>"; };
+		FE3A1946279A749300018528 /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = SOURCE_ROOT; };
 		FE5E13F12798CC9700560CD8 /* ZeemeeCodeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeemeeCodeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE5E13F42798CC9700560CD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE5E13FD2798CC9900560CD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		FE5E13F32798CC9700560CD8 /* ZeemeeCodeSample */ = {
 			isa = PBXGroup;
 			children = (
+				FE3A1946279A749300018528 /* Readme.md */,
 				FE5E13F42798CC9700560CD8 /* AppDelegate.swift */,
 				FE5E14242798CE1900560CD8 /* SearchViewController.swift */,
 				FE5E14322799198000560CD8 /* SearchResultCell.swift */,
@@ -251,6 +254,7 @@
 			files = (
 				FE5E14012798CC9900560CD8 /* LaunchScreen.storyboard in Resources */,
 				FE5E13FE2798CC9900560CD8 /* Assets.xcassets in Resources */,
+				FE3A1947279A749300018528 /* Readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
