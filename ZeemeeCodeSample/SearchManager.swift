@@ -8,10 +8,18 @@
 import Foundation
 import Combine
 
+
+/// Coordinates the Interactions between the user and our data layer
 class SearchManager {
-    let cocktailService = CocktailService()
+    private let cocktailService = CocktailService()
+    private var autoSubmitTimeout: AnyCancellable?
+    private var currentSubmission: AnyCancellable?
     
+    /// The current dataset that is expected on the UI
     @Published var searchResults: SearchResults = .Empty
+    
+    /// The current search query.
+    /// This may not be the same as the query in `.searchResults`.
     @Published var currentSearchQuery = "" {
         didSet {
             autoSubmitTimeout?.cancel()
@@ -27,15 +35,16 @@ class SearchManager {
         }
     }
     
-    var autoSubmitTimeout: Cancellable?
     
-    func triggerAutoSubmit(query: String) {
-        cocktailService.search(query: query) {_ in
-            print("fail")
-        } success: { [weak self] results in
-            /* Discard stale results */
-            guard let self = self, results.query == self.currentSearchQuery else { return  }
-            self.searchResults = results
-        }
+    private func triggerAutoSubmit(query: String) {
+        
+        currentSubmission = cocktailService.searchPublisher(for: query)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: {error in
+                print("[Error] search(\(query)) - \(error)")
+                self.searchResults = .Empty
+            }, receiveValue: { results in
+                self.searchResults = results
+            })
     }
 }
